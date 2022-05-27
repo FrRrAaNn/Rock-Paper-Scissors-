@@ -1,80 +1,57 @@
-const choices = ["rock", "paper", "scissors"];
-const winners = [];
+const computerChoiceDisplay = document.getElementById("computer-choice")
+const userChoiceDisplay = document.getElementById("user-choice")
+const resultDisplay = document.getElementById("result")
+const possibleChoices = document.querySelectorAll("button")
+let userChoice
+let computerChoice 
+let result 
 
+possibleChoices.forEach(possibleChoice => possibleChoice.addEventListener("click", (e) => {
+    userChoice = e.target.id 
+    userChoiceDisplay.innerHTML = userChoice
+    generateComputerChoice()
+    getResult()
+}))
 
-function game(){
-    for(let i=1; i<5; i++){
-        playRound(i);
+function generateComputerChoice() {
+    const randomNumber = Math.floor(Math.random() * 3) +1
+    console.log(randomNumber)
+
+    if (randomNumber === 1) {
+        computerChoice = "rock"
     }
-    logWins();
+
+    if (randomNumber === 2) {
+        computerChoice = "scissors"
+    }
+
+    if (randomNumber === 3) {
+        computerChoice = "paper"
+    }
+    computerChoiceDisplay.innerHTML = computerChoice
 }
 
-function playRound(round){
-    const playerSelection = playerChoice();
-    const computerSelection = computerChoice();
-    const winner = checkWinner (playerSelection, computerSelection);
-    winners.push(winner);
-    logRound(playerSelection, computerSelection, winner, round);
-}
-
-
-function playerChoice();
-    let input=prompt ("Type Rock, Paper, or Scissors");
-    while (input == null){
-        input = prompt("Type Rock, Paper, or Scissors");
+function getResult() {
+    if (computerChoice === userChoice){
+        result = "It's a draw!"
     }
-    input = input.toLowerCase();
-    let check = validateInput(input);
-    while (check == false) {
-        input = prompt(
-            "Type Rock,Paper, or Scissors. Spelling needs to be exact, but capitilization doesnt matter"
-        );
-        while (input == null){
-            input = prompt("Type Rock, Paper, or Scissors");
-        }
-        input = input.toLowerCase():
-        check = validateInput(input);
+    if (computerChoice === "rock" && userChoice === "paper"){
+        result = "You Win!!"
     }
-    return input;
-}
-
-function computerChoice(){
-    return choices[Math.floor(Math.random()*choices.length)]
-}
-
-function validateInput(choice){
-    return choice.includes(choice);
-}
-
-function checkWinner(choiceP, choiceC){
-    if(choiceP === choiceC){
-        return "Tie";
-    }else if((choiceP === "rock" && choiceC = "scissors") || 
-    (choiceP === "paper" && choiceC == "rock")||
-    (choiceP === "scissors" && choiceC == "paper")){
-        return "Player";
-    }else {
-        return "Computer";
+    if (computerChoice === "rock" && userChoice === "scissors"){
+        result = "You Lose"
     }
-
-    function logwins(){
-        let playerWins = winners.filter((item) => item == "Player").length;
-        let computerWins = winners.filter((item) => == "Computer").length;
-        let ties = winner.filter ((item) => item == "Ties").length;
-        console.log ("Results:")
-        console.log("Player Wins:", playerWins);
-        console.log ("Computer Wins:", computerWins);
-        console.log ("Ties:", ties);
+    if (computerChoice === "paper" && userChoice === "scissors"){
+        result = "You Win!!"
     }
-
-    function logRound(playerChoice, computerChoice, winner, round){
-        console.log('Round:', round);
-        console.log('Player Chose:', playerChoice);
-        console.log('Computer Chose:', computerChoice);
-        console.log(winner, 'Won the Round');
-        console.log("---------");
+    if (computerChoice === "paper" && userChoice === "rock"){
+        result = "You Lose"
     }
-
-    //all of this code is from a youtube tutorial.  I still do not know how to do this. 
-
+    if (computerChoice === "scissors" && userChoice === "rock"){
+        result = "You Win"
+    }
+    if (computerChoice === "scissors" && userChoice === "paper"){
+        result = "You Lose"
+    }
+    resultDisplay.innerHTML = result
 }
