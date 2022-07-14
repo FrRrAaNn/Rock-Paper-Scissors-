@@ -2,9 +2,11 @@ const computerChoiceDisplay = document.getElementById("computer-choice")
 const userChoiceDisplay = document.getElementById("user-choice")
 const resultDisplay = document.getElementById("result")
 const possibleChoices = document.querySelectorAll("button")
+const roundsPlayed = document.querySelector("countRounds")
 let userChoice
 let computerChoice 
 let result 
+let count = 0;
 
 possibleChoices.forEach(possibleChoice => possibleChoice.addEventListener("click", (e) => {
     userChoice = e.target.id 
@@ -54,4 +56,15 @@ function getResult() {
         result = "You Lose"
     }
     resultDisplay.innerHTML = result
+    function numberOfRoundsPlayed (){
+        count ++;
+        roundsPlayed.display.innerHTML = count; 
+    }
+    
 }
+ 
+
+
+//I am lost 
+
+//display the running score, and announce a winner of the game once one player reaches 5 points.
