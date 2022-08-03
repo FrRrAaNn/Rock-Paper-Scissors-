@@ -1,0 +1,19 @@
+button {
+    color: darkred;
+}
+
+h2{
+    color: darkblue;
+}
+
+
+body{
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
+    align-items:center
+}
+
+.thebuttons{
+    display: flex;
+}
